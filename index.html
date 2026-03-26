@@ -115,9 +115,9 @@
                 <div class="col-lg-8 mx-auto text-center">
                     <h3>Stay Updated</h3>
                     <p>Subscribe to get special offers and new product updates</p>
-                    <form class="row g-3 justify-content-center">
+                    <form class="row g-3 justify-content-center" onsubmit="return handleNewsletterSubmit(event)">
                         <div class="col-auto">
-                            <input type="email" class="form-control" placeholder="Enter your email">
+                            <input type="email" class="form-control" placeholder="Enter your email" required>
                         </div>
                         <div class="col-auto">
                             <button type="submit" class="btn btn-warning">Subscribe</button>

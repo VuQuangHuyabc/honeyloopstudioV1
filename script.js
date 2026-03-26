@@ -127,8 +127,31 @@ const products = [
 ];
 
 // Shopping Cart
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+let cart = [];
+let wishlist = [];
+
+// Safe localStorage operations
+function safeLocalStorageGet(key, defaultValue = []) {
+    try {
+        const item = localStorage.getItem(key);
+        return item ? JSON.parse(item) : defaultValue;
+    } catch (error) {
+        console.warn('localStorage access denied, using default value');
+        return defaultValue;
+    }
+}
+
+function safeLocalStorageSet(key, value) {
+    try {
+        localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+        console.warn('localStorage access denied, cart data not saved');
+    }
+}
+
+// Initialize cart and wishlist
+cart = safeLocalStorageGet('cart');
+wishlist = safeLocalStorageGet('wishlist');
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
@@ -209,63 +232,95 @@ function createProductCard(product) {
 
 // Load product detail
 function loadProductDetail() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = parseInt(urlParams.get('id'));
-    
-    if (productId) {
-        const product = products.find(p => p.id === productId);
-        if (product) {
-            displayProductDetail(product);
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get('id'));
+        
+        if (productId && !isNaN(productId)) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                displayProductDetail(product);
+            } else {
+                showNotification('Product not found', 'error');
+                // Redirect to products page after a short delay
+                setTimeout(() => {
+                    window.location.href = 'products.html';
+                }, 2000);
+            }
+        } else {
+            showNotification('Invalid product ID', 'error');
+            // Redirect to products page after a short delay
+            setTimeout(() => {
+                window.location.href = 'products.html';
+            }, 2000);
         }
+    } catch (error) {
+        console.error('Error loading product detail:', error);
+        showNotification('Error loading product', 'error');
+        setTimeout(() => {
+            window.location.href = 'products.html';
+        }, 2000);
     }
 }
 
 // Display product detail
 function displayProductDetail(product) {
-    // Update basic info
-    document.getElementById('product-title').textContent = product.name;
-    document.getElementById('product-price').textContent = `$${product.price.toFixed(2)}`;
-    document.getElementById('product-description').textContent = product.description;
-    document.getElementById('product-sku').textContent = `HLS-${product.id.toString().padStart(4, '0')}`;
-    
-    // Update main image
-    const mainImage = document.getElementById('main-image');
-    if (mainImage) {
-        mainImage.src = product.image;
-        mainImage.alt = product.name;
+    try {
+        // Update basic info
+        const titleElement = document.getElementById('product-title');
+        const priceElement = document.getElementById('product-price');
+        const descElement = document.getElementById('product-description');
+        const skuElement = document.getElementById('product-sku');
+        
+        if (titleElement) titleElement.textContent = product.name;
+        if (priceElement) priceElement.textContent = `$${product.price.toFixed(2)}`;
+        if (descElement) descElement.textContent = product.description;
+        if (skuElement) skuElement.textContent = `HLS-${product.id.toString().padStart(4, '0')}`;
+        
+        // Update main image
+        const mainImage = document.getElementById('main-image');
+        if (mainImage) {
+            mainImage.src = product.image;
+            mainImage.alt = product.name;
+        }
+        
+        // Update variant images
+        const variantImagesContainer = document.getElementById('variant-images');
+        if (variantImagesContainer && product.variants) {
+            variantImagesContainer.innerHTML = product.variants.map((variant, index) => `
+                <div class="col-2 col-md-3 mb-2">
+                    <img src="${variant.image}" 
+                         alt="${variant.color}" 
+                         class="img-fluid rounded thumbnail-img ${index === 0 ? 'active' : ''}"
+                         onclick="changeMainImage('${variant.image}', this)"
+                         style="cursor: pointer; border: 2px solid ${index === 0 ? '#ffc107' : 'transparent'}; transition: all 0.3s ease;">
+                </div>
+            `).join('');
+        }
+        
+        // Update color variants
+        const colorVariantsContainer = document.getElementById('color-variants');
+        if (colorVariantsContainer && product.variants) {
+            colorVariantsContainer.innerHTML = product.variants.map((variant, index) => `
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="color" id="color-${index}" value="${variant.color}" ${index === 0 ? 'checked' : ''}>
+                    <label class="form-check-label" for="color-${index}">${variant.color}</label>
+                </div>
+            `).join('');
+        }
+        
+        // Update breadcrumb
+        const breadcrumbCategory = document.getElementById('breadcrumb-category');
+        const breadcrumbProduct = document.getElementById('breadcrumb-product');
+        if (breadcrumbCategory) breadcrumbCategory.textContent = product.category.charAt(0).toUpperCase() + product.category.slice(1);
+        if (breadcrumbProduct) breadcrumbProduct.textContent = product.name;
+        
+        // Load related products
+        loadRelatedProducts(product.id, product.category);
+    } catch (error) {
+        console.error('Error displaying product detail:', error);
+        showNotification('Error displaying product details', 'error');
     }
-    
-    // Update variant images
-    const variantImagesContainer = document.getElementById('variant-images');
-    if (variantImagesContainer && product.variants) {
-        variantImagesContainer.innerHTML = product.variants.map((variant, index) => `
-            <div class="col-2 col-md-3 mb-2">
-                <img src="${variant.image}" 
-                     alt="${variant.color}" 
-                     class="img-fluid rounded thumbnail-img ${index === 0 ? 'active' : ''}"
-                     onclick="changeMainImage('${variant.image}', this)"
-                     style="cursor: pointer; border: 2px solid ${index === 0 ? '#ffc107' : 'transparent'}; transition: all 0.3s ease;">
-            </div>
-        `).join('');
-    }
-    
-    // Update color variants
-    const colorVariantsContainer = document.getElementById('color-variants');
-    if (colorVariantsContainer && product.variants) {
-        colorVariantsContainer.innerHTML = product.variants.map((variant, index) => `
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="color" id="color-${index}" value="${variant.color}" ${index === 0 ? 'checked' : ''}>
-                <label class="form-check-label" for="color-${index}">${variant.color}</label>
-            </div>
-        `).join('');
-    }
-    
-    // Update breadcrumb
-    document.getElementById('breadcrumb-category').textContent = product.category.charAt(0).toUpperCase() + product.category.slice(1);
-    document.getElementById('breadcrumb-product').textContent = product.name;
-    
-    // Load related products
-    loadRelatedProducts(product.id, product.category);
 }
 
 // Change main image
@@ -445,13 +500,16 @@ function updateCartSummary() {
 
 // Save cart to localStorage
 function saveCart() {
-    localStorage.setItem('cart', JSON.stringify(cart));
+    safeLocalStorageSet('cart', cart);
 }
 
 // Search products
 function searchProducts(event) {
     event.preventDefault();
-    const searchTerm = document.getElementById('search-input').value.toLowerCase();
+    const searchInput = document.getElementById('search-input');
+    if (!searchInput) return false;
+    
+    const searchTerm = searchInput.value.toLowerCase().trim();
     
     if (searchTerm) {
         const filteredProducts = products.filter(product => 

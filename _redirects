@@ -1,5 +1,0 @@
-# Cloudflare Pages redirects file
-# This ensures all routes work properly when deployed
-
-# Handle 404 errors by redirecting to index.html
-/*    /index.html   404

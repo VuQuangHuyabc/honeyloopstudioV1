@@ -155,28 +155,65 @@ wishlist = safeLocalStorageGet('wishlist');
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing...');
+    initializeApp();
+});
+
+// Fallback for Cloudflare Pages
+if (document.readyState === 'loading') {
+    // DOM still loading, event will handle it
+} else {
+    // DOM already loaded
+    console.log('DOM already loaded, initializing immediately...');
+    setTimeout(initializeApp, 100);
+}
+
+function initializeApp() {
     updateCartCount();
     
+    // Get current path for better detection
+    const currentPath = window.location.pathname;
+    const currentPathLower = currentPath.toLowerCase();
+    
+    console.log('Current path:', currentPath);
+    
     // Load featured products on home page
-    if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
+    if (currentPathLower.includes('index') || currentPath === '/' || currentPath.endsWith('/')) {
+        console.log('Loading featured products');
         loadFeaturedProducts();
     }
     
     // Load all products on products page
-    if (window.location.pathname.includes('products.html')) {
+    if (currentPathLower.includes('products')) {
+        console.log('Loading products page');
         loadProducts();
+        // Handle search parameter if present
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchTerm = urlParams.get('search');
+        if (searchTerm) {
+            displaySearchResults(
+                products.filter(product => 
+                    product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    product.category.toLowerCase().includes(searchTerm.toLowerCase())
+                ),
+                searchTerm
+            );
+        }
     }
     
     // Load product detail
-    if (window.location.pathname.includes('product-detail.html')) {
+    if (currentPathLower.includes('product-detail')) {
+        console.log('Loading product detail page');
         loadProductDetail();
     }
     
     // Load cart items
-    if (window.location.pathname.includes('cart.html')) {
+    if (currentPathLower.includes('cart')) {
+        console.log('Loading cart page');
         loadCartItems();
     }
-});
+}
 
 // Update cart count
 function updateCartCount() {
@@ -233,14 +270,22 @@ function createProductCard(product) {
 // Load product detail
 function loadProductDetail() {
     try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const productId = parseInt(urlParams.get('id'));
+        console.log('Loading product detail...');
+        console.log('Current URL:', window.location.href);
         
-        if (productId && !isNaN(productId)) {
-            const product = products.find(p => p.id === productId);
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+        
+        console.log('Product ID from URL:', productId);
+        
+        if (productId && !isNaN(parseInt(productId))) {
+            const product = products.find(p => p.id === parseInt(productId));
+            console.log('Found product:', product);
+            
             if (product) {
                 displayProductDetail(product);
             } else {
+                console.error('Product not found with ID:', productId);
                 showNotification('Product not found', 'error');
                 // Redirect to products page after a short delay
                 setTimeout(() => {
@@ -248,6 +293,7 @@ function loadProductDetail() {
                 }, 2000);
             }
         } else {
+            console.error('Invalid or missing product ID:', productId);
             showNotification('Invalid product ID', 'error');
             // Redirect to products page after a short delay
             setTimeout(() => {
@@ -266,22 +312,48 @@ function loadProductDetail() {
 // Display product detail
 function displayProductDetail(product) {
     try {
+        console.log('Displaying product detail for:', product);
+        
         // Update basic info
         const titleElement = document.getElementById('product-title');
         const priceElement = document.getElementById('product-price');
         const descElement = document.getElementById('product-description');
         const skuElement = document.getElementById('product-sku');
         
-        if (titleElement) titleElement.textContent = product.name;
-        if (priceElement) priceElement.textContent = `$${product.price.toFixed(2)}`;
-        if (descElement) descElement.textContent = product.description;
-        if (skuElement) skuElement.textContent = `HLS-${product.id.toString().padStart(4, '0')}`;
+        if (titleElement) {
+            titleElement.textContent = product.name;
+            console.log('Updated title');
+        } else {
+            console.error('Product title element not found');
+        }
+        
+        if (priceElement) {
+            priceElement.textContent = `$${product.price.toFixed(2)}`;
+            console.log('Updated price');
+        } else {
+            console.error('Product price element not found');
+        }
+        
+        if (descElement) {
+            descElement.textContent = product.description;
+            console.log('Updated description');
+        } else {
+            console.error('Product description element not found');
+        }
+        
+        if (skuElement) {
+            skuElement.textContent = `HLS-${product.id.toString().padStart(4, '0')}`;
+            console.log('Updated SKU');
+        }
         
         // Update main image
         const mainImage = document.getElementById('main-image');
         if (mainImage) {
             mainImage.src = product.image;
             mainImage.alt = product.name;
+            console.log('Updated main image');
+        } else {
+            console.error('Main image element not found');
         }
         
         // Update variant images
@@ -296,6 +368,9 @@ function displayProductDetail(product) {
                          style="cursor: pointer; border: 2px solid ${index === 0 ? '#ffc107' : 'transparent'}; transition: all 0.3s ease;">
                 </div>
             `).join('');
+            console.log('Updated variant images');
+        } else {
+            console.error('Variant images container not found or no variants');
         }
         
         // Update color variants
@@ -307,19 +382,55 @@ function displayProductDetail(product) {
                     <label class="form-check-label" for="color-${index}">${variant.color}</label>
                 </div>
             `).join('');
+            console.log('Updated color variants');
+        } else {
+            console.error('Color variants container not found or no variants');
         }
         
         // Update breadcrumb
         const breadcrumbCategory = document.getElementById('breadcrumb-category');
         const breadcrumbProduct = document.getElementById('breadcrumb-product');
-        if (breadcrumbCategory) breadcrumbCategory.textContent = product.category.charAt(0).toUpperCase() + product.category.slice(1);
-        if (breadcrumbProduct) breadcrumbProduct.textContent = product.name;
+        if (breadcrumbCategory) {
+            breadcrumbCategory.textContent = product.category.charAt(0).toUpperCase() + product.category.slice(1);
+            console.log('Updated breadcrumb category');
+        }
+        if (breadcrumbProduct) {
+            breadcrumbProduct.textContent = product.name;
+            console.log('Updated breadcrumb product');
+        }
         
         // Load related products
         loadRelatedProducts(product.id, product.category);
+        
+        // Initialize size selection
+        initializeSizeSelection(product.sizes);
+        
+        console.log('Product detail display completed successfully');
     } catch (error) {
         console.error('Error displaying product detail:', error);
         showNotification('Error displaying product details', 'error');
+    }
+}
+
+// Initialize size selection
+function initializeSizeSelection(availableSizes) {
+    const sizeButtons = document.querySelectorAll('.size-btn');
+    
+    sizeButtons.forEach(btn => {
+        const size = btn.dataset.size;
+        if (availableSizes.includes(size)) {
+            btn.disabled = false;
+            btn.classList.remove('disabled');
+        } else {
+            btn.disabled = true;
+            btn.classList.add('disabled');
+        }
+    });
+    
+    // Select first available size
+    const firstAvailableBtn = document.querySelector('.size-btn:not(.disabled)');
+    if (firstAvailableBtn) {
+        firstAvailableBtn.classList.add('active');
     }
 }
 
@@ -369,23 +480,47 @@ function addToCart(product = null) {
     }
     
     if (productToAdd) {
-        const existingItem = cart.find(item => item.id === productToAdd.id);
+        // Get quantity from input
+        const quantityInput = document.getElementById('quantity');
+        const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+        
+        // Get selected size
+        const selectedSizeBtn = document.querySelector('.size-btn.active');
+        const selectedSize = selectedSizeBtn ? selectedSizeBtn.dataset.size : 'M';
+        
+        // Get selected color
+        const selectedColorInput = document.querySelector('input[name="color"]:checked');
+        const selectedColor = selectedColorInput ? selectedColorInput.value : 'Default';
+        
+        // Create unique item key based on product, size, and color
+        const itemKey = `${productToAdd.id}-${selectedSize}-${selectedColor}`;
+        const existingItem = cart.find(item => item.itemKey === itemKey);
         
         if (existingItem) {
-            existingItem.quantity += 1;
+            existingItem.quantity += quantity;
         } else {
             cart.push({
+                itemKey: itemKey,
                 id: productToAdd.id,
                 name: productToAdd.name,
                 price: productToAdd.price,
                 image: productToAdd.image,
-                quantity: 1
+                quantity: quantity,
+                size: selectedSize,
+                color: selectedColor
             });
         }
         
         saveCart();
         updateCartCount();
-        showNotification('Product added to cart!', 'success');
+        showNotification(`${quantity} x ${productToAdd.name} added to cart!`, 'success');
+        
+        // Reset quantity to 1
+        if (quantityInput) {
+            quantityInput.value = 1;
+        }
+    } else {
+        showNotification('Product not found', 'error');
     }
 }
 
@@ -410,6 +545,9 @@ function loadCartItems() {
 
 // Create cart item HTML
 function createCartItemHTML(item) {
+    const sizeInfo = item.size ? `<span class="badge bg-secondary me-2">Size: ${item.size}</span>` : '';
+    const colorInfo = item.color && item.color !== 'Default' ? `<span class="badge bg-info me-2">Color: ${item.color}</span>` : '';
+    
     return `
         <div class="cart-item">
             <div class="row align-items-center">
@@ -418,20 +556,21 @@ function createCartItemHTML(item) {
                 </div>
                 <div class="col-md-4">
                     <h6>${item.name}</h6>
+                    <div class="mb-2">${sizeInfo}${colorInfo}</div>
                     <p class="text-muted mb-0">$${item.price.toFixed(2)}</p>
                 </div>
                 <div class="col-md-3">
                     <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity(${item.id}, -1)">-</button>
-                        <input type="number" class="form-control text-center quantity-input" value="${item.quantity}" min="1" onchange="setQuantity(${item.id}, this.value)">
-                        <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity(${item.id}, 1)">+</button>
+                        <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity('${item.itemKey}', -1)">-</button>
+                        <input type="number" class="form-control text-center quantity-input" value="${item.quantity}" min="1" onchange="setQuantity('${item.itemKey}', this.value)">
+                        <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity('${item.itemKey}', 1)">+</button>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <strong>$${(item.price * item.quantity).toFixed(2)}</strong>
                 </div>
                 <div class="col-md-1">
-                    <button class="btn btn-outline-danger btn-sm" onclick="removeFromCart(${item.id})">
+                    <button class="btn btn-outline-danger btn-sm" onclick="removeFromCart('${item.itemKey}')">
                         <i class="bi bi-trash"></i>
                     </button>
                 </div>
@@ -441,12 +580,12 @@ function createCartItemHTML(item) {
 }
 
 // Update quantity
-function updateQuantity(productId, change) {
-    const item = cart.find(item => item.id === productId);
+function updateQuantity(itemKey, change) {
+    const item = cart.find(item => item.itemKey === itemKey);
     if (item) {
         item.quantity += change;
         if (item.quantity <= 0) {
-            removeFromCart(productId);
+            removeFromCart(itemKey);
         } else {
             saveCart();
             updateCartCount();
@@ -456,12 +595,12 @@ function updateQuantity(productId, change) {
 }
 
 // Set quantity
-function setQuantity(productId, quantity) {
-    const item = cart.find(item => item.id === productId);
+function setQuantity(itemKey, quantity) {
+    const item = cart.find(item => item.itemKey === itemKey);
     if (item) {
         item.quantity = parseInt(quantity);
         if (item.quantity <= 0) {
-            removeFromCart(productId);
+            removeFromCart(itemKey);
         } else {
             saveCart();
             updateCartCount();
@@ -471,8 +610,8 @@ function setQuantity(productId, quantity) {
 }
 
 // Remove from cart
-function removeFromCart(productId) {
-    cart = cart.filter(item => item.id !== productId);
+function removeFromCart(itemKey) {
+    cart = cart.filter(item => item.itemKey !== itemKey);
     saveCart();
     updateCartCount();
     loadCartItems();

@@ -5,12 +5,12 @@ const products = [
         name: "Classic Cable Knit Sweater",
         price: 89.99,
         category: "pullover",
-        image: "Sản phẩm 1/main-image-1.jpeg",
+        image: "SP1/main-image-1.jpeg",
         description: "A beautiful cable knit sweater perfect for cold winter days. Made from premium wool blend.",
         variants: [
-            { color: "Cream", image: "Sản phẩm 1/main-image-1.jpeg" },
-            { color: "Beige", image: "Sản phẩm 1/main-image-2.jpeg" },
-            { color: "Gray", image: "Sản phẩm 1/main-image-3.jpeg" }
+            { color: "Cream", image: "SP1/main-image-1.jpeg" },
+            { color: "Beige", image: "SP1/main-image-2.jpeg" },
+            { color: "Gray", image: "SP1/main-image-3.jpeg" }
         ],
         sizes: ["XS", "S", "M", "L", "XL"],
         inStock: true
@@ -20,12 +20,12 @@ const products = [
         name: "Elegant Wool Cardigan",
         price: 79.99,
         category: "cardigan",
-        image: "Sản phẩm 2/main-image-1.jpeg",
+        image: "SP2/variant-image-1.jpeg",
         description: "Stylish and versatile cardigan that can be dressed up or down for any occasion.",
         variants: [
-            { color: "Black", image: "Sản phẩm 2/main-image-1.jpeg" },
-            { color: "Navy", image: "Sản phẩm 2/main-image-2.jpeg" },
-            { color: "Burgundy", image: "Sản phẩm 2/main-image-3.jpeg" }
+            { color: "Black", image: "SP2/variant-image-2.jpeg" },
+            { color: "Navy", image: "SP2/variant-image-3.jpeg" },
+            { color: "Burgundy", image: "SP2/variant-image-4.jpeg" }
         ],
         sizes: ["S", "M", "L", "XL"],
         inStock: true
@@ -35,12 +35,12 @@ const products = [
         name: "Cozy Turtleneck Sweater",
         price: 69.99,
         category: "pullover",
-        image: "Sản phẩm 3/main-image-1.jpeg",
+        image: "SP3/main-image-1.jpeg",
         description: "Timeless turtleneck sweater that's perfect for layering or wearing on its own.",
         variants: [
-            { color: "Forest Green", image: "Sản phẩm 3/main-image-1.jpeg" },
-            { color: "Camel", image: "Sản phẩm 3/main-image-2.jpeg" },
-            { color: "Charcoal", image: "Sản phẩm 3/main-image-3.jpeg" }
+            { color: "Forest Green", image: "SP3/main-image-1.jpeg" },
+            { color: "Camel", image: "SP3/main-image-2.jpeg" },
+            { color: "Charcoal", image: "SP3/main-image-3.jpeg" }
         ],
         sizes: ["XS", "S", "M", "L", "XL"],
         inStock: true
@@ -50,13 +50,13 @@ const products = [
         name: "Stylish Knit Vest",
         price: 59.99,
         category: "vest",
-        image: "Sản phẩm 4/variant-image-1.jpeg",
+        image: "SP4/main-image-1.jpeg",
         description: "Cozy and warm vest perfect for adding an extra layer of style.",
-        variants: [
-            { color: "Camel", image: "Sản phẩm 4/variant-image-1.jpeg" },
-            { color: "Gray", image: "Sản phẩm 4/variant-image-2.jpeg" },
-            { color: "Brown", image: "Sản phẩm 4/variant-image-3.jpeg" },
-            { color: "Black", image: "Sản phẩm 4/variant-image-4.jpeg" }
+        mains: [
+            { color: "Camel", image: "SP4/main-image-2.jpeg" },
+            { color: "Gray", image: "SP4/main-image-3.jpeg" },
+            { color: "Brown", image: "SP4/main-image-4.jpeg" },
+            { color: "Black", image: "SP4/main-image-5.jpeg" }
         ],
         sizes: ["S", "M", "L"],
         inStock: true
@@ -66,12 +66,12 @@ const products = [
         name: "Bohemian Pattern Sweater",
         price: 94.99,
         category: "pullover",
-        image: "Sản phẩm 5/main-image-1.jpeg",
+        image: "SP5/variant-image-1.jpeg",
         description: "Unique bohemian-inspired sweater with intricate patterns and details.",
         variants: [
-            { color: "Multi-color", image: "Sản phẩm 5/main-image-1.jpeg" },
-            { color: "Brown", image: "Sản phẩm 5/main-image-2.jpeg" },
-            { color: "Cream", image: "Sản phẩm 5/main-image-3.jpeg" }
+            { color: "Multi-color", image: "SP5/variant-image-1.jpeg" },
+            { color: "Brown", image: "SP5/variant-image-2.jpeg" },
+            { color: "Cream", image: "SP5/variant-image-3.jpeg" }
         ],
         sizes: ["S", "M", "L", "XL"],
         inStock: true
@@ -81,13 +81,13 @@ const products = [
         name: "Lightweight Summer Cardigan",
         price: 54.99,
         category: "cardigan",
-        image: "Sản phẩm 6/variant-image-1.jpeg",
+        image: "SP6/main-image-1.jpeg",
         description: "Perfect lightweight cardigan for spring and summer evenings.",
-        variants: [
-            { color: "White", image: "Sản phẩm 6/variant-image-1.jpeg" },
-            { color: "Lavender", image: "Sản phẩm 6/variant-image-2.jpeg" },
-            { color: "Pink", image: "Sản phẩm 6/variant-image-3.jpeg" },
-            { color: "Beige", image: "Sản phẩm 6/variant-image-4.jpeg" }
+        mains: [
+            { color: "White", image: "SP6/main-image-1.jpeg" },
+            { color: "Lavender", image: "SP6/main-image-2.jpeg" },
+            { color: "Pink", image: "SP6/main-image-3.jpeg" },
+            { color: "Beige", image: "SP6/main-image-4.jpeg" }
         ],
         sizes: ["XS", "S", "M", "L", "XL"],
         inStock: true
@@ -97,13 +97,13 @@ const products = [
         name: "Premium Cashmere Sweater",
         price: 129.99,
         category: "pullover",
-        image: "Sản phẩm 8/main-image-1.jpeg",
+        image: "SP8/main-image-1.jpeg",
         description: "Luxurious cashmere sweater for ultimate comfort and elegance.",
         variants: [
-            { color: "Ivory", image: "Sản phẩm 8/main-image-1.jpeg" },
-            { color: "Blush", image: "Sản phẩm 8/main-image-2.jpeg" },
-            { color: "Sage", image: "Sản phẩm 8/main-image-3.jpeg" },
-            { color: "Charcoal", image: "Sản phẩm 8/main-image-4.jpeg" }
+            { color: "Ivory", image: "SP8/main-image-1.jpeg" },
+            { color: "Blush", image: "SP8/main-image-2.jpeg" },
+            { color: "Sage", image: "SP8/main-image-3.jpeg" },
+            { color: "Charcoal", image: "SP8/main-image-4.jpeg" }
         ],
         sizes: ["XS", "S", "M", "L", "XL"],
         inStock: true
@@ -113,13 +113,13 @@ const products = [
         name: "Modern Layered Vest",
         price: 49.99,
         category: "vest",
-        image: "Sản phẩm 9/variant-image-1.jpeg",
+        image: "SP7/variant-image-1.jpeg",
         description: "Modern and stylish vest perfect for layering over any outfit.",
         variants: [
-            { color: "Navy", image: "Sản phẩm 9/variant-image-1.jpeg" },
-            { color: "Khaki", image: "Sản phẩm 9/variant-image-2.jpeg" },
-            { color: "Black", image: "Sản phẩm 9/variant-image-3.jpeg" },
-            { color: "Olive", image: "Sản phẩm 9/variant-image-4.jpeg" }
+            { color: "Navy", image: "SP7/variant-image-1.jpeg" },
+            { color: "Khaki", image: "SP7/variant-image-2.jpeg" },
+            { color: "Black", image: "SP7/variant-image-3.jpeg" },
+            { color: "Olive", image: "SP7/va-image-4.jpeg" }
         ],
         sizes: ["S", "M", "L", "XL"],
         inStock: true

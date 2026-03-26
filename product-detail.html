@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail - Honey Loop Studio LLC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <img src="Logo/Ảnh chụp màn hình 2026-03-26 114453.png" alt="Honey Loop Studio" class="me-2" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;">
+                Honey Loop Studio LLC
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="cart.html">
+                            <i class="bi bi-cart3"></i> Cart
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+                <form class="d-flex ms-3" onsubmit="return searchProducts(event)">
+                    <input class="form-control me-2" type="search" placeholder="Search products..." id="search-input">
+                    <button class="btn btn-outline-warning" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Product Detail Section -->
+    <section class="py-5">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="products.html">Products</a></li>
+                    <li class="breadcrumb-item active" id="breadcrumb-category">Category</li>
+                    <li class="breadcrumb-item active" id="breadcrumb-product">Product</li>
+                </ol>
+            </nav>
+
+            <div class="row">
+                <!-- Product Images -->
+                <div class="col-lg-6">
+                    <div class="product-image-main mb-3">
+                        <img id="main-image" src="" alt="Product" class="img-fluid rounded shadow" style="width: 100%; height: 450px; object-fit: cover;">
+                    </div>
+                    <div class="product-image-thumbnails">
+                        <div class="row" id="variant-images">
+                            <!-- Variant images will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="col-lg-6">
+                    <h1 id="product-title" class="display-5 fw-bold mb-3">Product Name</h1>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="text-warning me-2">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </div>
+                        <span class="text-muted">(24 reviews)</span>
+                    </div>
+                    <h2 id="product-price" class="h3 text-primary mb-3">$0.00</h2>
+                    <p id="product-description" class="lead mb-4">Product description will be loaded here.</p>
+
+                    <!-- Variants -->
+                    <div class="mb-4">
+                        <h5>Color:</h5>
+                        <div class="d-flex gap-2" id="color-variants">
+                            <!-- Color variants will be loaded here -->
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Size:</h5>
+                        <div class="d-flex gap-2" id="size-options">
+                            <button class="btn btn-outline-secondary size-btn" data-size="XS">XS</button>
+                            <button class="btn btn-outline-secondary size-btn" data-size="S">S</button>
+                            <button class="btn btn-outline-secondary size-btn" data-size="M">M</button>
+                            <button class="btn btn-outline-secondary size-btn" data-size="L">L</button>
+                            <button class="btn btn-outline-secondary size-btn" data-size="XL">XL</button>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Quantity:</h5>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="input-group" style="width: 150px;">
+                                <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity()">-</button>
+                                <input type="number" class="form-control text-center" id="quantity" value="1" min="1" max="10">
+                                <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity()">+</button>
+                            </div>
+                            <span id="stock-status" class="text-success">In Stock</span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-3 mb-4">
+                        <button class="btn btn-warning btn-lg flex-fill" onclick="addToCart()">
+                            <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                        </button>
+                        <button class="btn btn-outline-danger btn-lg" onclick="addToWishlist()">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+
+                    <!-- Product Features -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Product Features</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Premium quality materials</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Handcrafted with care</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Machine washable</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>30-day return policy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Details Tabs -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <ul class="nav nav-tabs" id="productTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button">Description</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button">Details</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button">Reviews</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="productTabsContent">
+                        <div class="tab-pane fade show active" id="description" role="tabpanel">
+                            <div class="p-4">
+                                <h5>Description</h5>
+                                <p id="full-description">Full product description will be loaded here.</p>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="details" role="tabpanel">
+                            <div class="p-4">
+                                <h5>Product Details</h5>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Material:</strong></td>
+                                            <td>Premium Wool Blend</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Care Instructions:</strong></td>
+                                            <td>Machine wash cold, tumble dry low</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Origin:</strong></td>
+                                            <td>Made in USA</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>SKU:</strong></td>
+                                            <td id="product-sku">N/A</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="reviews" role="tabpanel">
+                            <div class="p-4">
+                                <h5>Customer Reviews</h5>
+                                <div id="reviews-container">
+                                    <!-- Reviews will be loaded here -->
+                                </div>
+                                <button class="btn btn-outline-primary mt-3" onclick="loadMoreReviews()">Load More Reviews</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h3 class="mb-4">Related Products</h3>
+                    <div class="row" id="related-products">
+                        <!-- Related products will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Column 1: Company Info -->
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Honey Loop Studio LLC</h5>
+                    <p class="mb-2">Your trusted destination for quality women's sweaters.</p>
+                    <p class="mb-2">contact@honeyloopstudio.com</p>
+                    <p class="mb-2">1012 Marquez Place Ste. 106-B Santa Fe, NM 87505</p>
+                    <p class="mb-2">Hours: 9 AM - 5 PM</p>
+                </div>
+
+                <!-- Column 2: Information Centre -->
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">INFORMATION CENTRE</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="about.html" class="text-white-50 text-decoration-none">About Us</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-white-50 text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="privacy.html" class="text-white-50 text-decoration-none">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="shipping.html" class="text-white-50 text-decoration-none">Shipping Policy</a></li>
+                        <li class="mb-2"><a href="terms.html" class="text-white-50 text-decoration-none">Terms & Conditions</a></li>
+                        <li class="mb-2"><a href="returns.html" class="text-white-50 text-decoration-none">Returns & Refunds</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Newsletter -->
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Newsletter</h5>
+                    <p class="mb-3">Subscribe to get special offers and new product updates</p>
+                    <form class="newsletter-form" onsubmit="return handleNewsletterSubmit(event)">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Enter your email" required>
+                            <button class="btn btn-warning" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                    <div class="mt-4">
+                        <p>&copy; 2024 Honey Loop Studio LLC. All rights reserved.</p>
+                        <p class="small">honeyloopstudio.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"></script>
+    <script src="script.js"></script>
+</body>
+</html>

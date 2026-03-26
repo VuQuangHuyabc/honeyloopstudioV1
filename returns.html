@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Returns & Refunds - Honey Loop Studio LLC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <img src="Logo/Ảnh chụp màn hình 2026-03-26 114453.png" alt="Honey Loop Studio" class="me-2" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;">
+                Honey Loop Studio LLC
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="cart.html">
+                            <i class="bi bi-cart3"></i> Cart
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+                <form class="d-flex ms-3" onsubmit="return searchProducts(event)">
+                    <input class="form-control me-2" type="search" placeholder="Search products..." id="search-input">
+                    <button class="btn btn-outline-warning" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header py-5 bg-light">
+        <div class="container">
+            <h1 class="display-5 fw-bold">Returns & Refunds</h1>
+            <p class="lead">Our return and refund policy</p>
+        </div>
+    </section>
+
+    <!-- Returns Policy Content -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="h4 mb-4">Returns and Refunds Policy</h2>
+                            
+                            <p class="mb-4">You are entitled to cancel your order within 30 days without giving any reason for doing so.</p>
+                            
+                            <p class="mb-4">The deadline for canceling an order is 30 days from the date you received the goods or on which a third party you have appointed, who is not the carrier, takes possession of the product delivered.</p>
+                            
+                            <p class="mb-4">In order to exercise your right of cancellation, you must inform us of your decision by means of a clear statement.</p>
+                            
+                            <p class="mb-4">You can inform us of your decision by e-mail contact@honeyloopstudio.com</p>
+                            
+                            <p class="mb-4">We will reimburse you no later than 30 days from the day on which we receive the returned goods. We will use the same means of payment as you used for the order, and you will not incur any fees for such reimbursement.</p>
+                            
+                            <h3 class="h5 mb-3">Conditions for returns:</h3>
+                            <p class="mb-4">In order for the goods to be eligible for a return, please make sure that:</p>
+                            <ul class="mb-4">
+                                <li>The goods were purchased in the last 30 days</li>
+                                <li>The goods are in the original packaging</li>
+                            </ul>
+                            
+                            <h3 class="h5 mb-3">The following goods cannot be returned:</h3>
+                            <ul class="mb-4">
+                                <li>The supply of goods made to your specifications or clearly personalized.</li>
+                                <li>The supply of goods which according to their nature are not suitable to be returned, for example goods which deteriorate rapidly or where the date of expiry is over.</li>
+                                <li>The supply of goods which are not suitable for return due to health protection or hygiene reasons and were unsealed after delivery.</li>
+                                <li>The supply of goods which are, after delivery, according to their nature, inseparably mixed with other items.</li>
+                            </ul>
+                            
+                            <p class="mb-4">We reserve the right to refuse returns of any merchandise that does not meet the above return conditions at our sole discretion.</p>
+                            
+                            <h3 class="h5 mb-3">Returning Goods</h3>
+                            <p class="mb-4">You are responsible for the cost and risk of returning the goods to us.</p>
+                            
+                            <p class="mb-4">We cannot be held responsible for goods damaged or lost in return shipment. Therefore, we recommend an insured and trackable mail service. We are unable to issue a refund without actual receipt of the goods or proof of received return delivery.</p>
+                            
+                            <p class="mb-4">If the goods weren't marked as a gift when purchased, or the gift giver had the order shipped to themselves to give it to you later, we will send the refund to the gift giver.</p>
+                            
+                            <div class="alert alert-info mb-4">
+                                <strong>Return Process:</strong><br>
+                                1. Contact us at contact@honeyloopstudio.com to initiate your return<br>
+                                2. We will provide you with a return authorization number<br>
+                                3. Pack the item securely in its original packaging<br>
+                                4. Ship the item to our return address using a trackable service<br>
+                                5. Once we receive and inspect the item, we will process your refund
+                            </div>
+                            
+                            <h3 class="h5 mb-3">Refund Process</h3>
+                            <p class="mb-4">Once we receive your returned item, we will inspect it and notify you of the status of your refund. If your return is approved, we will initiate a refund to your original payment method within 30 days.</p>
+                            
+                            <p class="mb-4">Please note that shipping costs are non-refundable unless the return is due to our error (defective item, wrong item shipped, etc.).</p>
+                            
+                            <h3 class="h5 mb-3">Exchanges</h3>
+                            <p class="mb-4">If you need to exchange an item for a different size or color, please follow our return process and place a new order for the desired item. We recommend placing the new order promptly to ensure availability.</p>
+                            
+                            <h3 class="h5 mb-3">Damaged or Defective Items</h3>
+                            <p class="mb-4">If you receive a damaged or defective item, please contact us immediately at contact@honeyloopstudio.com. Please provide your order number and a photo of the damage. We will arrange for a replacement or refund at no additional cost to you.</p>
+                            
+                            <h3 class="h5 mb-3">Sale Items</h3>
+                            <p class="mb-4">Sale items are final sale and cannot be returned or exchanged unless they are damaged or defective.</p>
+                            
+                            <div class="alert alert-warning mb-4">
+                                <strong>Important:</strong> Please keep your proof of purchase (order confirmation email or receipt) as it may be required for all returns and exchanges.
+                            </div>
+                            
+                            <h3 class="h5 mb-3">Contact Us</h3>
+                            <p class="mb-4">If you have any questions about our Returns and Refunds Policy, please contact us by e-mail contact@honeyloopstudio.com</p>
+                            
+                            <div class="bg-light p-3 rounded mb-4">
+                                <p class="mb-2"><strong>Email:</strong> contact@honeyloopstudio.com</p>
+                                <p class="mb-2"><strong>Phone:</strong> +1 (505) 555-0123</p>
+                                <p class="mb-2"><strong>Address:</strong> 1012 Marquez Place Ste. 106-B Santa Fe, NM 87505</p>
+                                <p class="mb-0"><strong>Website:</strong> honeyloopstudio.com</p>
+                            </div>
+                            
+                            <h3 class="h5 mb-3">Policy Updates</h3>
+                            <p class="mb-4">Honey Loop Studio LLC reserves the right to modify this returns and refunds policy at any time. Any changes will be effective immediately upon posting on our website.</p>
+                            
+                            <p class="text-muted mt-4"><small>Last updated: December 2024</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Column 1: Company Info -->
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Honey Loop Studio LLC</h5>
+                    <p class="mb-2">Your trusted destination for quality women's sweaters.</p>
+                    <p class="mb-2">contact@honeyloopstudio.com</p>
+                    <p class="mb-2">1012 Marquez Place Ste. 106-B Santa Fe, NM 87505</p>
+                    <p class="mb-2">Hours: 9 AM - 5 PM</p>
+                </div>
+
+                <!-- Column 2: Information Centre -->
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">INFORMATION CENTRE</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="about.html" class="text-white-50 text-decoration-none">About Us</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-white-50 text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="privacy.html" class="text-white-50 text-decoration-none">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="shipping.html" class="text-white-50 text-decoration-none">Shipping Policy</a></li>
+                        <li class="mb-2"><a href="terms.html" class="text-white-50 text-decoration-none">Terms & Conditions</a></li>
+                        <li class="mb-2"><a href="returns.html" class="text-white-50 text-decoration-none">Returns & Refunds</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Newsletter -->
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Newsletter</h5>
+                    <p class="mb-3">Subscribe to get special offers and new product updates</p>
+                    <form class="newsletter-form" onsubmit="return handleNewsletterSubmit(event)">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Enter your email" required>
+                            <button class="btn btn-warning" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                    <div class="mt-4">
+                        <p>&copy; 2024 Honey Loop Studio LLC. All rights reserved.</p>
+                        <p class="small">honeyloopstudio.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -9,8 +9,8 @@
 None required
 
 ## Redirects
-- `_redirects` file handles all routing for proper SPA behavior
-- All 404 errors redirect to index.html for client-side routing
+- No redirects file needed for static HTML files
+- Cloudflare Pages automatically serves HTML files directly
 
 ## Important Notes for Deployment
 1. Ensure all file paths use forward slashes
@@ -26,4 +26,4 @@ None required
 - Added fallback DOM initialization mechanism
 - Improved error handling in product detail loading
 - Added comprehensive console logging for debugging
-- Created `_redirects` file for proper routing
+- Removed problematic _redirects file (not needed for static sites)

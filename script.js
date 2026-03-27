@@ -23,9 +23,9 @@ const products = [
         image: "SP2/variant-image-1.jpeg",
         description: "Stylish and versatile cardigan that can be dressed up or down for any occasion.",
         variants: [
-            { color: "Black", image: "SP2/variant-image-2.jpeg" },
-            { color: "Navy", image: "SP2/variant-image-3.jpeg" },
-            { color: "Burgundy", image: "SP2/variant-image-4.jpeg" }
+            { color: "Black", image: "SP2/variant-image-1.jpeg" },
+            { color: "Navy", image: "SP2/variant-image-2.jpeg" },
+            { color: "Burgundy", image: "SP2/variant-image-3.jpeg" }
         ],
         sizes: ["S", "M", "L", "XL"],
         inStock: true
@@ -52,11 +52,11 @@ const products = [
         category: "vest",
         image: "SP4/main-image-1.jpeg",
         description: "Cozy and warm vest perfect for adding an extra layer of style.",
-        mains: [
-            { color: "Camel", image: "SP4/main-image-2.jpeg" },
-            { color: "Gray", image: "SP4/main-image-3.jpeg" },
-            { color: "Brown", image: "SP4/main-image-4.jpeg" },
-            { color: "Black", image: "SP4/main-image-5.jpeg" }
+variants: [
+            { color: "Camel", image: "SP4/main-image-1.jpeg" },
+            { color: "Gray", image: "SP4/main-image-2.jpeg" },
+            { color: "Brown", image: "SP4/main-image-3.jpeg" },
+            { color: "Black", image: "SP4/main-image-4.jpeg" }
         ],
         sizes: ["S", "M", "L"],
         inStock: true
@@ -83,7 +83,7 @@ const products = [
         category: "cardigan",
         image: "SP6/main-image-1.jpeg",
         description: "Perfect lightweight cardigan for spring and summer evenings.",
-        mains: [
+variants: [
             { color: "White", image: "SP6/main-image-1.jpeg" },
             { color: "Lavender", image: "SP6/main-image-2.jpeg" },
             { color: "Pink", image: "SP6/main-image-3.jpeg" },
@@ -97,13 +97,13 @@ const products = [
         name: "Premium Cashmere Sweater",
         price: 129.99,
         category: "pullover",
-        image: "SP8/main-image-1.jpeg",
+image: "SP7/variant-image-1.jpeg",
         description: "Luxurious cashmere sweater for ultimate comfort and elegance.",
         variants: [
-            { color: "Ivory", image: "SP8/main-image-1.jpeg" },
-            { color: "Blush", image: "SP8/main-image-2.jpeg" },
-            { color: "Sage", image: "SP8/main-image-3.jpeg" },
-            { color: "Charcoal", image: "SP8/main-image-4.jpeg" }
+            { color: "Ivory", image: "SP7/variant-image-1.jpeg" },
+            { color: "Blush", image: "SP7/variant-image-2.jpeg" },
+            { color: "Sage", image: "SP7/variant-image-3.jpeg" },
+            { color: "Charcoal", image: "SP7/main-image-4.jpeg" }
         ],
         sizes: ["XS", "S", "M", "L", "XL"],
         inStock: true
@@ -113,13 +113,13 @@ const products = [
         name: "Modern Layered Vest",
         price: 49.99,
         category: "vest",
-        image: "SP7/variant-image-1.jpeg",
+image: "SP8/main-image-1.jpeg",
         description: "Modern and stylish vest perfect for layering over any outfit.",
         variants: [
-            { color: "Navy", image: "SP7/variant-image-1.jpeg" },
-            { color: "Khaki", image: "SP7/variant-image-2.jpeg" },
-            { color: "Black", image: "SP7/variant-image-3.jpeg" },
-            { color: "Olive", image: "SP7/va-image-4.jpeg" }
+            { color: "Navy", image: "SP8/main-image-1.jpeg" },
+            { color: "Khaki", image: "SP8/main-image-2.jpeg" },
+            { color: "Black", image: "SP8/main-image-3.jpeg" },
+            { color: "Olive", image: "SP8/main-image-4.jpeg" }
         ],
         sizes: ["S", "M", "L", "XL"],
         inStock: true
